@@ -1,41 +1,29 @@
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
 
-public class Main {
-    public static void main(String[] args) {
-     colloection(8,4,2, 2, 2,2, 2, 2, 2, 2);
-    }
+class Main {
+    public static int maxUniqueNum(int intNumber, int subArrySize, int... arr) {
+        int maxNum = 0;
+        for (int i = 0; i < intNumber - subArrySize; ++i) {
+            int currentUnique = 0;
 
+            HashMap<Integer, Integer> map = new HashMap<>();
 
-
-
-   static void colloection(int IntNumber, int subArraySize, int ...queue){
-        LinkedList<Integer> list = new LinkedList<Integer>();
-        for(int i = 0; i < IntNumber; ++i){
-            list.add(queue[i]);
-        }
-
-        System.out.println("intNumber = " + list.size());
-        System.out.println("queue = " + list);
-
-        int maxNumbers =0;
-        for(int i=0; i< subArraySize-maxNumbers; i++)
-        {
-            int unique =0;
-            HashMap<LinkedList, Integer> map = new HashMap<LinkedList, Integer>();
-            for(int j=0; j< i+maxNumbers; j++)
-            {
-                if(!map.containsKey(list))
-                {
-                    map.put(list,1); //adding elements in my list
-                    unique++;
+            for (int j = i; j < i + subArrySize; ++j) {
+                if (!map.containsKey(arr[j])) {
+                    map.put(arr[i], 1);
+                    ++currentUnique;
                 }
             }
-            if(unique > maxNumbers){
-                maxNumbers = unique;
-            }
+            if (currentUnique > maxNum)
+                maxNum = currentUnique;
         }
-        System.out.println("Output = " + maxNumbers);
+        return maxNum;
+    }
+
+    public static void main(String[] args) {
+        int[] queue = {2, 2, 2, 2, 2, 2};
+        int intNumber = 6;
+        int subArrySize = 3;
+        System.out.println(maxUniqueNum(intNumber, subArrySize, queue));
     }
 }
